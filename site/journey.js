@@ -9,9 +9,11 @@
   const assetUrl=value=>new URL(value.replace(/^\/+/,''),new URL('./',location.href)).href;
   const summaries={natural:'轻调光线与色彩',photographer:'更突出主体与层次',creative:'尝试新的视角与氛围'};
   const jobKey='light-isle-journey-job',sampleKey='light-isle-journey-sample',orderKey='light-isle-journey-order';
-  let cases=[],heroLevel='creative',current=null,session=null,generation=0,uploading=false,config={mode:'demo',payments:{enabled:false}},backendReady=staticPreview,toastTimer,checkoutSelection=null,pendingOrder=null;
+  let cases=[],heroLevel='natural',current=null,session=null,generation=0,uploading=false,config={mode:'demo',payments:{enabled:false}},backendReady=staticPreview,toastTimer,checkoutSelection=null,pendingOrder=null;
   const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
-  let heroIndex=0,heroTurn=0,heroTimer,heroPaused=reducedMotion.matches,heroHovered=false,heroVisible=true,heroLoading=false,heroDisplayed=null,heroTouch=null;
+  let heroTurn=0,heroTimer,heroPaused=reducedMotion.matches,heroHovered=false,heroVisible=true,heroLoading=false,heroDisplayed=null,heroTouch=null;
+  const heroCase=()=>cases.find(item=>item.id==='01_backlit_portrait');
+  function nextHeroLevel(direction){const index=levels.indexOf(heroLevel);return levels[index<0?(direction>0?0:levels.length-1):(index+direction+levels.length)%levels.length];}
   const heroImages=new Map();
   const objectUrls=new Set();
   const stored=key=>{try{return JSON.parse(sessionStorage.getItem(key));}catch{return null;}};
@@ -48,13 +50,13 @@
   function scheduleHero(){
     clearTimeout(heroTimer);
     $('#hero-rotation').textContent=heroPaused?'播放':'暂停';$('#hero-rotation').setAttribute('aria-label',heroPaused?'播放自动轮播':'暂停自动轮播');
-    if(cases.length<2||heroPaused||heroHovered||!heroVisible||heroLoading||document.hidden||$('#landing').hidden)return;
-    heroTimer=setTimeout(()=>{heroIndex=(heroIndex+1)%cases.length;void setHero(heroLevel,{automatic:true});},7000);
+    if(!heroCase()||heroPaused||heroHovered||!heroVisible||heroLoading||document.hidden||$('#landing').hidden)return;
+    heroTimer=setTimeout(()=>{void setHero(nextHeroLevel(1),{automatic:true});},7000);
   }
   function pauseHero(){heroPaused=true;scheduleHero();}
-  function moveHero(direction){if(!cases.length)return;pauseHero();heroIndex=(heroIndex+direction+cases.length)%cases.length;void setHero(heroLevel);}
+  function moveHero(direction){if(!heroCase())return;pauseHero();void setHero(nextHeroLevel(direction));}
   async function setHero(level,{automatic=false}={}){
-    if(!cases.length)return;heroLevel=level;const item=cases[heroIndex],turn=++heroTurn;heroLoading=true;clearTimeout(heroTimer);
+    const item=heroCase();if(!item)return;heroLevel=level;const turn=++heroTurn;heroLoading=true;clearTimeout(heroTimer);
     const stage=$('.hero-photo-stage');stage.setAttribute('aria-busy','true');
     try{
       await Promise.all([loadHeroImage(item.images.original.url),loadHeroImage(item.images[level].url)]);
@@ -62,13 +64,13 @@
       $('#hero-original').src=item.images.original.url;$('#hero-original').alt=`${item.label}原片`;
       $('#hero-image').src=item.images[level].url;$('#hero-image').alt=`${item.title} · ${names[level]}`;
       $('#hero-image-label').textContent=names[level];$('#hero-case-kind').textContent=item.label;
-      $('#hero-case-count').textContent=`${String(heroIndex+1).padStart(2,'0')} / ${String(cases.length).padStart(2,'0')}`;
+      $('#hero-case-count').textContent=level==='original'?'原片':`${String(levels.indexOf(level)+1).padStart(2,'0')} / 03`;
       $('#hero-change').textContent=level==='original'?'这是未经本次编辑的原片，可以切换三个版本对比。':item.notes[levels.indexOf(level)];
       $('#hero-source').textContent=item.source+' · 照片细节可能变化。';
-      $('.hero-example').setAttribute('aria-label',`${item.label} · 原片与${names[level]}对比`);stage.dataset.case=item.id;heroDisplayed=item;
+      $('.hero-example').setAttribute('aria-label',`${item.label} · 原片与${names[level]}对比`);stage.dataset.case=item.id;stage.dataset.level=level;heroDisplayed=item;
       document.querySelectorAll('[data-hero-level]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.heroLevel===level)));
-      if(!automatic)$('#hero-slide-status').textContent=`第 ${heroIndex+1} 组，共 ${cases.length} 组：${item.label}，${names[level]}。`;
-      if(!reducedMotion.matches&&stage.animate)stage.animate([{opacity:.6},{opacity:1}],{duration:280,easing:'ease-out'});
+      if(!automatic)$('#hero-slide-status').textContent=level==='original'?'查看原片。':`第 ${levels.indexOf(level)+1} 档，共 3 档：${names[level]}。`;
+      if(!reducedMotion.matches&&$('.hero-after').animate)$('.hero-after').animate([{opacity:.6},{opacity:1}],{duration:280,easing:'ease-out'});
     }catch(e){if(turn===heroTurn){heroPaused=true;toast(e.message);}}
     finally{if(turn===heroTurn){heroLoading=false;stage.setAttribute('aria-busy','false');scheduleHero();}}
   }
@@ -267,7 +269,7 @@
   reducedMotion.addEventListener('change',()=>{if(reducedMotion.matches)pauseHero();});
   document.querySelectorAll('[data-type]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-type]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));renderGallery(b.dataset.type);});
   $('#gallery').addEventListener('click',e=>{const b=e.target.closest('[data-case]');if(b)openSample(b.dataset.case);});
-  const openHero=()=>{pauseHero();const item=heroDisplayed||cases[heroIndex];if(item){openSample(item.id);if(levels.includes(heroLevel))choose(heroLevel);}else toast('示例正在加载，请稍候。');};
+  const openHero=()=>{pauseHero();const item=heroDisplayed||heroCase();if(item){openSample(item.id);if(levels.includes(heroLevel))choose(heroLevel);}else toast('示例正在加载，请稍候。');};
   $('#try-sample').onclick=openHero;$('#open-hero-case').onclick=openHero;
   $('.brand').addEventListener('click',e=>{e.preventDefault();showHome();});$('#back-home').onclick=()=>showHome();
   document.querySelectorAll('[data-home-anchor]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();showHome(a.dataset.homeAnchor);}));
@@ -289,7 +291,7 @@
       const response=await fetch('journey-cases.json');if(!response.ok)throw new Error('案例暂时没有加载成功，请刷新重试。');
       const data=await response.json();cases=data.cases;
       for(const c of cases)for(const image of Object.values(c.images))image.url=assetUrl(image.url);
-      for(const selector of ['#hero-previous','#hero-next','#hero-rotation'])$(selector).disabled=cases.length<2;
+      for(const selector of ['#hero-previous','#hero-next','#hero-rotation'])$(selector).disabled=!heroCase();
       void setHero(heroLevel);renderGallery();
       const previous=stored(sampleKey);
       const returnOrder=new URLSearchParams(location.search).get('order_id');
