@@ -1,1 +1,2 @@
 window.LIGHT_ISLE_STATIC_PREVIEW = true;
+window.LIGHT_ISLE_API_BASE_URL = "";

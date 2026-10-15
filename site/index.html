@@ -4,7 +4,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f6f5f1">
 <meta name="description" content="光屿 AI 摄影工作室：把随手一拍，变成心动一张。上传一张照片，比较自然修好、摄影师优化、创意重拍三种方向。免登录体验。">
 <title>光屿 AI 摄影师 · 让日常，多一点出片</title>
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="journey.css?v=studio-20261015"><script src="preview-config.js"></script><script src="journey.js?v=studio-20261015" defer></script>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="journey.css?v=workflow-20261015"><script src="preview-config.js"></script><script src="journey.js?v=workflow-20261015" defer></script>
 </head>
 <body>
 <header class="site-header container">
@@ -45,7 +45,7 @@
 <section id="workspace" class="workspace container" hidden aria-labelledby="workspace-title"><div class="workspace-top"><button class="text-action" id="back-home">← 回到首页</button><button class="text-action" data-upload>换张照片 ↗</button></div><div class="workspace-heading"><div><p class="kicker" id="workspace-eyebrow">我的照片</p><h1 id="workspace-title">三种可能，选你喜欢的。</h1></div><span id="workspace-source"></span></div><div id="workspace-content" aria-live="polite"></div></section>
 </main>
 <button class="sticky-upload button primary" data-upload hidden>上传照片，看看三种可能 <span aria-hidden="true">↗</span></button><input type="file" id="file-input" accept="image/jpeg,image/png,image/webp" hidden>
-<dialog id="checkout-dialog" aria-labelledby="checkout-title"><button class="dialog-close" id="close-checkout" aria-label="关闭下载确认">×</button><p class="kicker">留住你喜欢的这一张</p><h2 id="checkout-title">确认所选版本</h2><div class="checkout-selected"><img id="checkout-image" alt="所选照片缩略图"><div><strong id="checkout-name"></strong><p id="checkout-meta"></p></div></div><div class="checkout-price"><span>本次体验</span><strong>¥0 <small>拟定 ¥6.9 / 版本</small></strong></div><p class="checkout-disclosure">当前为免费演示，不会实际扣款。下载你选中的这一版，不会重新生成。</p><button class="button primary" id="download-button">确认并免费下载 <span aria-hidden="true">↓</span></button><p id="download-status" role="status"></p></dialog>
+<dialog id="checkout-dialog" aria-labelledby="checkout-title"><button class="dialog-close" id="close-checkout" aria-label="关闭下载确认">×</button><p class="kicker">留住你喜欢的这一张</p><h2 id="checkout-title">确认所选版本</h2><div class="checkout-selected"><img id="checkout-image" alt="所选照片缩略图"><div><strong id="checkout-name"></strong><p id="checkout-meta"></p></div></div><div class="checkout-price"><span>本次体验</span><strong>¥0 <small>拟定 ¥6.9 / 版本</small></strong></div><p class="checkout-disclosure">当前为免费演示，不会实际扣款。下载你选中的这一版，不会重新生成。</p><button class="button primary" id="download-button">确认并免费下载 <span aria-hidden="true">↓</span></button><a id="payment-link" class="text-action" hidden>继续前往 Stripe 付款 ↗</a><p id="download-status" role="status"></p></dialog>
 <div id="toast" role="status" aria-live="polite"></div>
 </body>
 </html>
