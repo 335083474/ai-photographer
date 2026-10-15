@@ -1,0 +1,1 @@
+window.LIGHT_ISLE_STATIC_PREVIEW = true;

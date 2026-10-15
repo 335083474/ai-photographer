@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f6f5f0">
+<meta name="description" content="光屿 AI 摄影师：上传一张照片，看看三种可能。先看效果，喜欢再下载。免登录体验。">
+<title>光屿 AI 摄影师 · 一张照片，三种可能</title><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="journey.css"><script src="preview-config.js"></script><script src="journey.js" defer></script>
+</head><body>
+<header class="site-header container">
+  <a href="#" class="brand" aria-label="光屿首页"><span class="brand-symbol" aria-hidden="true">✳</span><span>光屿<small>AI PHOTOGRAPHER</small></span></a>
+  <nav aria-label="主导航"><a href="#examples" data-home-anchor="examples">看看效果</a><a href="#questions" data-home-anchor="questions">价格与问题</a></nav>
+  <div class="header-actions"><button class="text-action" id="resume-task" hidden>继续看我的结果 ↗</button><a class="version-link" href="versions/editorial-v1/index.html">原版对照 ↗</a></div>
+</header>
+<main>
+<div id="landing">
+  <section class="hero container" aria-labelledby="hero-title">
+    <div class="hero-copy">
+      <p class="kicker"><span aria-hidden="true">✳</span> 给生活一点光</p>
+      <h1 id="hero-title">上传一张照片，<br>看看<span>三种可能。</span></h1>
+      <p class="hero-description">光线差一点，构图差一点，或只是想换个感觉。<br>自然修好、摄影师优化、创意重拍，都看看再选。</p>
+      <div class="upload-entry" id="upload-drop"><button class="button primary large" data-upload>上传照片，免费预览 <span aria-hidden="true">↗</span></button><p><span class="drop-hint">也可以把照片拖到这里</span><span>JPG / PNG / WebP · 最大 20 MB</span></p></div>
+      <button class="text-action sample-entry" id="try-sample">先用示例照片试一遍 <span aria-hidden="true">→</span></button>
+      <div class="purchase-note"><span>无需登录</span><span>喜欢再下载</span><span>拟定 ¥6.9 / 所选版本</span></div>
+      <p class="demo-notice">当前体验免费。示例展示实际 AI 编辑；自己上传的照片暂用本地调色与裁剪演示。</p>
+    </div>
+    <figure class="hero-example" aria-label="逆光旅行照的三个版本">
+      <div class="example-heading"><span>先看看，一张旅行照的变化</span><span class="sample-tag">示例</span></div>
+      <div class="hero-photo-stage"><img id="hero-image" alt="" fetchpriority="high"><span class="photo-caption" id="hero-image-label">创意重拍</span><figure class="original-inset"><img id="hero-original" alt="逆光旅行照合成原片"><figcaption>原片</figcaption></figure></div>
+      <div class="example-tabs" role="group" aria-label="首页示例版本"><button data-hero-level="original" aria-pressed="false">原片</button><button data-hero-level="natural" aria-pressed="false">自然修好</button><button data-hero-level="photographer" aria-pressed="false">摄影师优化</button><button data-hero-level="creative" aria-pressed="true">创意重拍</button></div>
+      <figcaption class="example-caption"><span id="hero-change">换了站姿、取景和光线。</span><button class="text-action" id="open-hero-case">三张一起看 ↗</button></figcaption><p class="source-note">合成原片 · 实际 AI 编辑，背景可能重绘。</p>
+    </figure>
+  </section>
+  <section class="examples container" id="examples" aria-labelledby="examples-title">
+    <div class="section-heading"><div><p class="kicker">找到和你相似的那一张</p><h2 id="examples-title">你的照片，也有新的可能。</h2></div><p>点开案例，原片和三张结果一起看。</p></div>
+    <div class="type-filters" role="group" aria-label="照片类型"><button data-type="all" aria-pressed="true">全部</button><button data-type="portrait" aria-pressed="false">人像</button><button data-type="landscape" aria-pressed="false">风景</button><button data-type="people-landscape" aria-pressed="false">人在风景里</button><button data-type="other" aria-pressed="false">更多类型</button></div>
+    <div class="photo-wall" id="gallery" aria-live="polite"><p class="loading">正在准备案例…</p></div><p class="gallery-source">示例含合成照片与图库实拍，成片来自人工编排的 AI 编辑测试，照片细节可能变化。</p>
+  </section>
+  <section class="questions container" id="questions" aria-labelledby="questions-title">
+    <div><p class="kicker">开始之前，你可能想知道</p><h2 id="questions-title">先看效果，<br>喜欢再带走。</h2><p class="question-intro">上传 → 看三张效果 → 选择 → 下载</p></div>
+    <div class="question-list">
+      <details><summary>上传就需要付费吗？<span aria-hidden="true">+</span></summary><p>不需要。先看三个版本，喜欢再选择下载。拟定价格为每个所选版本 ¥6.9；当前演示全程免费，不会实际扣款。</p></details>
+      <details><summary>照片会公开吗？<span aria-hidden="true">+</span></summary><p>不会加入照片墙。当前演示只上传到这台电脑上的服务，照片与结果最长保留 24 小时，可在结果区立即删除。</p></details>
+      <details><summary>三个版本都不喜欢怎么办？<span aria-hidden="true">+</span></summary><p>可以随时换张照片，再比较三个方向。针对偏好的再次生成尚未接入，当前不会把相同结果当作新版本重复展示。</p></details>
+      <details><summary>当前演示能体验什么？<span aria-hidden="true">+</span></summary><p>示例可以直接比较已经生成的三档 AI 编辑结果。自己的照片可以体验上传、本地调色裁切、三档选择和同版下载；自动 AI 编辑与真实支付尚未接入。无需登录。</p></details>
+    </div>
+  </section>
+  <footer class="site-footer container"><span>光屿 · 给生活一点光。</span><div><a href="test-lab.html">修图测试室 ↗</a><a href="versions/editorial-v1/index.html">查看原版 ↗</a><span>布局体验版 · 不收费</span></div></footer>
+</div>
+<section id="workspace" class="workspace container" hidden aria-labelledby="workspace-title"><div class="workspace-top"><button class="text-action" id="back-home">← 回到首页</button><button class="text-action" data-upload>换张照片 ↗</button></div><div class="workspace-heading"><div><p class="kicker" id="workspace-eyebrow">我的照片</p><h1 id="workspace-title">三种可能，选你喜欢的。</h1></div><span id="workspace-source"></span></div><div id="workspace-content" aria-live="polite"></div></section>
+</main>
+<button class="sticky-upload button primary" data-upload hidden>上传我的照片 <span aria-hidden="true">↗</span></button><input type="file" id="file-input" accept="image/jpeg,image/png,image/webp" hidden>
+<dialog id="checkout-dialog" aria-labelledby="checkout-title"><button class="dialog-close" id="close-checkout" aria-label="关闭下载确认">×</button><p class="kicker">留住你喜欢的这一张</p><h2 id="checkout-title">确认所选版本</h2><div class="checkout-selected"><img id="checkout-image" alt="所选照片缩略图"><div><strong id="checkout-name"></strong><p id="checkout-meta"></p></div></div><div class="checkout-price"><span>本次体验</span><strong>¥0 <small>拟定 ¥6.9 / 版本</small></strong></div><p class="checkout-disclosure">当前为免费演示，不会实际扣款。下载你选中的这一版，不会重新生成。</p><button class="button primary" id="download-button">确认并免费下载 <span aria-hidden="true">↓</span></button><p id="download-status" role="status"></p></dialog>
+<div id="toast" role="status" aria-live="polite"></div>
+</body></html>

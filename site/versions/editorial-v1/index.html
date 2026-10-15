@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f5f4ee">
+  <meta name="description" content="光屿 AI 摄影师。上传照片，先看效果，喜欢再下载。探索构图、光影、动作与色彩的摄影对比作品墙。">
+  <title>光屿 · AI Photographer — 让照片，更值得喜欢</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="wall.css"><link rel="stylesheet" href="workflow.css"><link rel="stylesheet" href="home-design.css"><script src="app.js" defer></script><script src="home-design.js" defer></script>
+<script src="../../history-preview.js" defer></script></head>
+<body>
+  <header class="header"><a class="brand" href="#" aria-label="光屿首页"><span class="brand-mark" aria-hidden="true">✳</span><span>光屿 <span class="brand-en">AI PHOTOGRAPHER</span></span></a><nav aria-label="主导航"><a href="#examples">照片墙</a><a href="#how">如何使用</a><a href="#pricing">简单定价</a></nav><button class="button button-small" data-upload>上传照片 <span aria-hidden="true">↗</span></button></header>
+  <main>
+    <section class="editorial-hero wrap" aria-labelledby="hero-title">
+      <div class="editorial-copy">
+        <p class="editorial-kicker"><span aria-hidden="true">✳</span> 给生活一点光 / LIGHT ISLE</p>
+        <h1 id="hero-title">这一刻，<br>值得<span class="hero-emphasis">更好看。</span></h1>
+        <p class="editorial-description">好风景、好表情，还有没拍好的瞬间。<br>换一点光，换一个构图，看看照片的另一种可能。</p>
+        <div class="hero-actions"><button class="button button-large" data-upload>上传我的照片 <span aria-hidden="true">↗</span></button><a href="#examples" class="hero-explore">先看看作品 <span aria-hidden="true">↓</span></a></div>
+        <p class="editorial-flow">上传 <span>→</span> 看三张效果 <span>→</span> 喜欢再付费下载</p>
+        <div class="workflow-entry"><button class="text-button" id="demo-workflow">体验三张方案演示 ↗</button><button class="text-button" id="resume-task" hidden>继续查看上次结果 ↗</button></div>
+        <div class="hero-footnote"><span class="hero-index">01 /</span><p>从轻轻修好，到重新想象。<br><span>选择权，一直在你手里。</span></p></div>
+      </div>
+      <figure class="editorial-feature">
+        <div class="featured-frame">
+          <img id="featured-photo" src="test-assets/20261007-v1/01_backlit_portrait/creative-5897997da30e.jpg" alt="创意重拍测试：湖边旅行人像，暖色侧光与放松站姿" fetchpriority="high" width="1086" height="1448">
+          <span class="featured-label" id="featured-label">创意重拍</span>
+          <div class="featured-original"><img src="test-assets/20261007-v1/01_backlit_portrait/original-4a2e812a86ba.jpg" alt="合成原片：脸部偏暗的湖边逆光人像" width="1600" height="2000"><span>原片</span></div>
+          <div class="featured-controls" role="group" aria-label="首图版本"><button data-featured="original" aria-pressed="false">原片</button><button data-featured="creative" class="active" aria-pressed="true">创意重拍 <span aria-hidden="true">✦</span></button></div>
+        </div>
+        <figcaption><span>旅行人像 · 光影与姿态</span><a href="test-lab.html?case=01_backlit_portrait">查看三档与评审 ↗</a></figcaption>
+        <p class="featured-disclosure">合成原片 · 实际 AI 编辑案例；首页上传为本地调色与裁剪演示。</p>
+      </figure>
+    </section>
+    <div class="editorial-ribbon wrap"><span>每一张，都有新的可能。</span><p>人像 <i> / </i> 风景 <i> / </i> 旅行 <i> / </i> 日常 <i> / </i> 宠物 <i> / </i> 美食</p><span aria-hidden="true">✳</span></div>
+    <section class="examples wrap photo-wall-section" id="examples" aria-labelledby="examples-title">
+      <div class="wall-toolbar"><div><p class="section-kicker">THE PHOTO WALL / 照片墙</p><h2 id="examples-title">好看，藏在这些改变里。</h2><p>构图、光影、动作、色彩与场景。看看实际 AI 编辑的改变。</p></div>
+      <div class="filters" role="group" aria-label="改善方式"><button class="filter active" data-filter="all" aria-pressed="true">全部 <span>6</span></button><button class="filter" data-filter="composition" aria-pressed="false">构图</button><button class="filter" data-filter="light" aria-pressed="false">光影</button><button class="filter" data-filter="pose" aria-pressed="false">动作</button><button class="filter" data-filter="color" aria-pressed="false">色彩</button><button class="filter" data-filter="scene" aria-pressed="false">场景</button></div></div>
+      <div class="wall-key"><span><span class="legend-before"></span>调整前 <span class="key-arrow">↔</span><span class="legend-after"></span>调整后</span><span>拖动或点按切换 · 点击 ↗ 放大</span></div>
+      <div id="gallery" class="gallery photo-wall" aria-live="polite"></div>
+      <p class="demo-note">六组合成原片与实际 AI 编辑结果，来自修图测试室。场景与细节可能重绘，完整三档和问题记录均保留；尚未接入首页自动生成。</p>
+      <div class="wall-ending"><span>你的照片，会是哪一种惊喜？</span><button class="button button-small" data-upload>试试我的照片 <span>↗</span></button></div>
+    </section>
+    <section class="possibilities wrap" aria-labelledby="possibilities-title">
+      <div class="possibilities-heading"><div><p class="section-kicker">ONE PHOTO. THREE DIRECTIONS.</p><h2 id="possibilities-title">修一点，还是多一点？</h2></div><p>一次看三个版本。<br>不用先决定，看到之后再选。</p></div>
+      <div class="possibilities-grid">
+        <article><div class="tier-photo"><img src="test-assets/20261007-v1/01_backlit_portrait/natural-fd63507fcce1.jpg" alt="自然修好：逆光旅行人像提亮" loading="lazy" width="1200" height="1500"><span>01</span></div><h3>自然修好 <span>轻一点</span></h3><p>改善曝光与色彩，保留原来的感觉。</p></article>
+        <article><div class="tier-photo"><img src="test-assets/20261007-v1/01_backlit_portrait/photographer-cace95f5f8c5.jpg" alt="摄影师优化：湖边人物更突出" loading="lazy" width="1122" height="1402"><span>02</span></div><h3>摄影师优化 <span>更出片</span></h3><p>调整光影与取景，让主体更突出。</p></article>
+        <article><div class="tier-photo"><img src="test-assets/20261007-v1/01_backlit_portrait/creative-5897997da30e.jpg" alt="创意重拍：暖色侧光与更放松站姿" loading="lazy" width="1086" height="1448"><span>03</span></div><h3>创意重拍 <span>换个想法</span></h3><p>尝试新的视角与姿态，探索更多可能。</p></article>
+      </div>
+      <div class="possibilities-bottom"><p>以上为同一合成原片的实际 AI 编辑结果；部分背景被重绘，人物保真仍需人工复核。</p><a href="test-lab.html?case=01_backlit_portrait">放大看看区别 ↗</a></div>
+    </section>
+    <section class="how-section" id="how"><div class="wrap how-inner"><div><p class="eyebrow">LESS EFFORT. MORE BEAUTIFUL.</p><h2>好看，可以很简单。</h2><p class="quiet">不必懂参数，也不用写提示词。</p></div><ol class="steps"><li><span class="step-number">01</span><h3>上传一张照片 <span>↗</span></h3><p>选一张你喜欢、又觉得差一点的照片。</p></li><li><span class="step-number">02</span><h3>三个版本，选喜欢的 <span>↗</span></h3><p>从自然修好到创意重拍，对比之后再决定。</p></li><li><span class="step-number">03</span><h3>下载，留住好看 <span>↓</span></h3><p>为所选结果付费，获取同一版无水印照片。</p></li></ol></div></section>
+    <section class="upload-section wrap" id="pricing"><div class="upload-panel" id="upload-drop"><div class="upload-panel-copy"><p class="eyebrow">YOUR PHOTO. THREE POSSIBILITIES.</p><h2>下一张惊喜，<br>从你的照片开始。</h2><p>三个版本都看看。心动了，再带走。</p><div class="price"><strong>¥6.9</strong><span>/ 所选版本 · 拟定价格</span></div><p class="panel-fine">无订阅 · 无积分 · 只为喜欢的结果付费</p></div><div class="drop-content"><span class="drop-symbol" aria-hidden="true">↥</span><h3>把照片拖到这里</h3><p>或从你的相册里，挑一张喜欢的</p><button class="button button-light" data-upload>选择照片 <span aria-hidden="true">↗</span></button><span class="file-hint">JPG / PNG / WebP · 最大 20 MB</span><span class="local-note">框架演示：仅传至本机服务，最长保留 24 小时，可删除</span></div></div></section>
+    <section class="faq wrap" aria-labelledby="faq-title"><h2 id="faq-title">你可能还想知道</h2><div><details><summary>上传后就需要付费吗？<span>+</span></summary><p>不需要。先查看三个版本，选中喜欢的再下载。当前框架演示不收取费用；真实支付尚未接入。</p></details><details><summary>照片会公开展示吗？<span>+</span></summary><p>不会。本地演示仅将照片传到这台电脑上的服务，不发送给外部 AI，也不加入照片墙。照片与结果最长保留 24 小时，服务运行时自动清理，也可在结果窗口立即删除。关闭页面后仍可在有效期内恢复任务。</p></details><details><summary>现在可以体验哪些修图能力？<span>+</span></summary><p>三档方案、结果选择、原图对比、拍摄建议展示和下载流程已串联。当前图片采用本地调色与裁剪，预设案例分类仅用于演示；自动语义识别、真实 AI 重拍、审美保真检查和真实支付尚未接入。</p></details></div></section>
+  </main>
+  <footer class="footer wrap"><a class="brand" href="#"><span class="brand-mark">✳</span><span>光屿 <span class="brand-en">AI PHOTOGRAPHER</span></span></a><span>给生活一点光。</span><a href="test-lab.html" style="font-size:10px;color:#829075">修图测试室 ↗</a><small>© 2026 光屿 · 交互体验版</small></footer>
+  <button class="mobile-upload button" data-upload>上传照片，免费预览 <span>↗</span></button>
+  <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp" hidden>
+  <dialog id="preview-dialog" aria-labelledby="preview-title"><div class="dialog-header"><div><p class="eyebrow" id="preview-eyebrow">YOUR PHOTO, IN A NEW LIGHT</p><h2 id="preview-title">看看，多了一点光。</h2></div><button class="icon-button close-dialog" aria-label="关闭预览">✕</button></div><div id="preview-content"></div></dialog>
+  <dialog id="checkout-dialog" class="checkout-dialog" aria-labelledby="checkout-title"><button class="icon-button close-dialog checkout-close" aria-label="关闭下载窗口">✕</button><span class="checkout-symbol">✦</span><p class="eyebrow">TAKE THE GOOD LIGHT WITH YOU.</p><h2 id="checkout-title">喜欢，就留住这一张。</h2><p class="checkout-selected" id="checkout-selected"></p><p class="checkout-sub">所选版本 · 无水印 · JPEG 格式</p><div class="checkout-price">¥6.9 <span>/ 版本</span></div><div class="checkout-detail"><span>框架演示</span><strong>本次不收费</strong></div><p class="checkout-note">支付暂未接入。确认后下载已预览的同一版处理结果，不会重新生成。</p><button class="button checkout-download" id="download-button">确认所选版本 · 免费体验下载 <span>↓</span></button><p class="quiet checkout-bottom">照片仅在本机服务处理，不会公开展示。</p></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body></html>

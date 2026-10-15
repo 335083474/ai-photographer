@@ -1,0 +1,257 @@
+{
+  "cases": [
+    {
+      "from": "lab",
+      "id": "01_backlit_portrait",
+      "type": "people-landscape",
+      "label": "人在风景里",
+      "title": "逆光旅行照，也能有好状态",
+      "focus": "补光 · 构图 · 姿态",
+      "level": "creative",
+      "notes": [
+        "人物变亮，但山景与云层有重绘。",
+        "人物更突出，原地貌细节仍有变化。",
+        "姿态、取景与光线有明显变化；背景为创作表达。"
+      ],
+      "images": {
+        "original": {
+          "url": "/test-assets/20261007-v1/01_backlit_portrait/original-4a2e812a86ba.jpg",
+          "width": 1086,
+          "height": 1448,
+          "sha256": "25300b014748edb7ffbf1b85e7b32591286a775ee5301f774554872b3509bda9"
+        },
+        "natural": {
+          "url": "/test-assets/20261007-v1/01_backlit_portrait/natural-fd63507fcce1.jpg",
+          "width": 1086,
+          "height": 1448,
+          "sha256": "f8e720eb970d7fb64512afce922ecd0e64617795ce0ba7983f34fa29cb4c3db7"
+        },
+        "photographer": {
+          "url": "/test-assets/20261007-v1/01_backlit_portrait/photographer-cace95f5f8c5.jpg",
+          "width": 1086,
+          "height": 1448,
+          "sha256": "28cf2c9ae24721892546ef6691be396566c50ea0f21b95d9f271578b1fcc9e0b"
+        },
+        "creative": {
+          "url": "/test-assets/20261007-v1/01_backlit_portrait/creative-5897997da30e.jpg",
+          "width": 1086,
+          "height": 1448,
+          "sha256": "779ff9af3eaf1e87e5c010cc04fba9694b9e609798b5745fe277fed79d2fe953"
+        }
+      },
+      "source": "合成原片 · 实际 AI 编辑",
+      "tip": "拍摄前让人物转向开阔阴影或使用轻微补光。"
+    },
+    {
+      "from": "member",
+      "id": "portrait",
+      "type": "portrait",
+      "label": "人像",
+      "title": "换个视角，让光影更有表现力",
+      "focus": "光影 · 视角",
+      "level": "creative",
+      "notes": [
+        "轻调也有细节重绘，人物保真需本人确认。",
+        "布光与取景有变化，细小五官仍需核对。",
+        "转头与近景为新表达，精确身份仍需本人确认。"
+      ],
+      "images": {
+        "original": {
+          "url": "/test-assets/20261013-chatgpt-web-people-scenery-v1/portrait/original.jpg",
+          "width": 1600,
+          "height": 2000,
+          "sha256": "8c405798201cdcbe8dd8059c2d4c5f335edd49dd86290a63f7cef1e436c0d989"
+        },
+        "natural": {
+          "url": "/test-assets/20261013-chatgpt-web-people-scenery-v1/portrait/natural.png",
+          "width": 1086,
+          "height": 1448,
+          "sha256": "1c2b2116c97ee75e475a3e840d548f3119c189c1822fd8f1fd018bb2d5af8fc9"
+        },
+        "photographer": {
+          "url": "/test-assets/20261013-chatgpt-web-people-scenery-v1/portrait/photographer.png",
+          "width": 1122,
+          "height": 1402,
+          "sha256": "e7711b0b1b89629021e374a4dbe39171a50e29a2f7e6581206a868fdf93aa6e8"
+        },
+        "creative": {
+          "url": "/test-assets/20261013-chatgpt-web-people-scenery-v1/portrait/creative.png",
+          "width": 1086,
+          "height": 1448,
+          "sha256": "bc15080c3d6f1989a86534a4689870e377986497176a2ec1ae23bff25c4f0ee5"
+        }
+      },
+      "source": "图库实拍原片 · 会员网页人工编辑",
+      "tip": "拍摄时多留一张稍宽的取景，给后期调整留出空间。"
+    },
+    {
+      "from": "member",
+      "id": "landscape",
+      "type": "landscape",
+      "label": "风景",
+      "title": "把湖边的光，重新想象一次",
+      "focus": "光影 · 氛围",
+      "level": "creative",
+      "notes": [
+        "明暗和色彩改善，地形细节仍需核对。",
+        "主体与层次更突出，山形细节需核对。",
+        "清晨暖光与薄雾是新的创作，不是当时天气的还原。"
+      ],
+      "images": {
+        "original": {
+          "url": "/test-assets/20261013-chatgpt-web-people-scenery-v1/landscape/original.jpg",
+          "width": 1600,
+          "height": 1067,
+          "sha256": "503aa25139ab5cabccdc919c4e76643b97e51cf202643766d9606ad36406c442"
+        },
+        "natural": {
+          "url": "/test-assets/20261013-chatgpt-web-people-scenery-v1/landscape/natural.png",
+          "width": 1536,
+          "height": 1024,
+          "sha256": "1a1a3027c8ccd724cf3768e75f9f8f00ebf2316ec34ae4ced1319f73be7b868f"
+        },
+        "photographer": {
+          "url": "/test-assets/20261013-chatgpt-web-people-scenery-v1/landscape/photographer.png",
+          "width": 1536,
+          "height": 1024,
+          "sha256": "f2002c7a8a8a4a3890dcc594b103e70c6d91484ff12396f3e112d6fbcbc14989"
+        },
+        "creative": {
+          "url": "/test-assets/20261013-chatgpt-web-people-scenery-v1/landscape/creative.png",
+          "width": 1536,
+          "height": 1024,
+          "sha256": "7b08dca97c3f98f0d087ef583c3f8733ca820291d4989f5fafb4b5d7465b4ae1"
+        }
+      },
+      "source": "图库实拍原片 · 会员网页人工编辑",
+      "tip": "拍摄时多留一张稍宽的取景，给后期调整留出空间。"
+    },
+    {
+      "from": "lab",
+      "id": "05_pet_background",
+      "type": "other",
+      "label": "宠物",
+      "title": "换到窗边，让可爱更突出",
+      "focus": "背景 · 光影",
+      "level": "creative",
+      "notes": [
+        "毛发与眼睛提亮，精细花纹仍需核对。",
+        "主体分离更强，但背景只做了部分整理。",
+        "窗边背景为新创作，花纹的一致性仍需核对。"
+      ],
+      "images": {
+        "original": {
+          "url": "/test-assets/20261007-v1/05_pet_background/original-7eb95219ba19.jpg",
+          "width": 1086,
+          "height": 1448,
+          "sha256": "977452a893df6e11b1eb140db16e6f9c1ff7f83dabc73de6e3b808d7213e5983"
+        },
+        "natural": {
+          "url": "/test-assets/20261007-v1/05_pet_background/natural-bf87a548b5c8.jpg",
+          "width": 1086,
+          "height": 1448,
+          "sha256": "3dc45575e09aaf665ceceb262738e3e6bf22e5d42f4380bf5d337488a66cca77"
+        },
+        "photographer": {
+          "url": "/test-assets/20261007-v1/05_pet_background/photographer-80c5e524130f.jpg",
+          "width": 1086,
+          "height": 1448,
+          "sha256": "c2956ffc8ed2ae5fed71f6ea835622eb0a28d9320f795f1a56a44850f36687e2"
+        },
+        "creative": {
+          "url": "/test-assets/20261007-v1/05_pet_background/creative-40aabc73e2d5.jpg",
+          "width": 1086,
+          "height": 1448,
+          "sha256": "dc47faa09dd99321e72a65470a8f9d0988227027b444e4368fd4940491dcb5e6"
+        }
+      },
+      "source": "合成原片 · 实际 AI 编辑",
+      "tip": "让猫咪面向窗户的散射光，再在眼睛高度拍摄。"
+    },
+    {
+      "from": "lab",
+      "id": "04_food_warm_light",
+      "type": "other",
+      "label": "美食",
+      "title": "把暖黄，调回鲜活的颜色",
+      "focus": "白平衡 · 色彩",
+      "level": "natural",
+      "notes": [
+        "偏黄减轻，细碎食材仍有生成变化。",
+        "背景更整洁，但左右盘沿仍被截断。",
+        "窗边氛围更明显，但完整餐盘的目标未完成。"
+      ],
+      "images": {
+        "original": {
+          "url": "/test-assets/20261007-v1/04_food_warm_light/original-ad9efdb16de1.jpg",
+          "width": 1086,
+          "height": 1448,
+          "sha256": "6b2a3eab76556a2c980caf3e24aea896103ae1e33fb4fecee5b6553455917db6"
+        },
+        "natural": {
+          "url": "/test-assets/20261007-v1/04_food_warm_light/natural-6330c71ff2e1.jpg",
+          "width": 1086,
+          "height": 1448,
+          "sha256": "2c46955c3abbe307759245afddd1415cc81e9c121b776f14642d2c6dcefe051c"
+        },
+        "photographer": {
+          "url": "/test-assets/20261007-v1/04_food_warm_light/photographer-16dc7de3c06b.jpg",
+          "width": 1086,
+          "height": 1448,
+          "sha256": "af35f911de0c5517aa377c01ffc1105ac413f8d8c27c7cc7fda25653a514a973"
+        },
+        "creative": {
+          "url": "/test-assets/20261007-v1/04_food_warm_light/creative-716b5fc7936d.jpg",
+          "width": 1086,
+          "height": 1448,
+          "sha256": "bf03fde7ad17479cc03e43718d658f0d582220c11c8527f4abd5373da1cc4e9b"
+        }
+      },
+      "source": "合成原片 · 实际 AI 编辑",
+      "tip": "拍之前把水杯、菜单和餐巾移出盘子周围，再让盘子完整落在取景框内。"
+    },
+    {
+      "from": "lab",
+      "id": "03_product_text",
+      "type": "other",
+      "label": "商品",
+      "title": "从桌面随拍，到简洁棚景",
+      "focus": "背景 · 质感",
+      "level": "creative",
+      "notes": [
+        "曝光改善，精确颜色与材质尚未测量。",
+        "桌面局部整理，文字与材质仍需核对。",
+        "中性棚景为新创作；商品色准和细节仍需复核。"
+      ],
+      "images": {
+        "original": {
+          "url": "/test-assets/20261007-v1/03_product_text/original-48b77bf60e0e.jpg",
+          "width": 1214,
+          "height": 1295,
+          "sha256": "a8911df872f9a482b1d843a328545877a4ade5399831e6836c95ae9bce5f79d8"
+        },
+        "natural": {
+          "url": "/test-assets/20261007-v1/03_product_text/natural-9200f191bca8.jpg",
+          "width": 1214,
+          "height": 1295,
+          "sha256": "f5622751cc9424204da0df6bcd21157fe88af88be8384c584cd4f05c1ab7b162"
+        },
+        "photographer": {
+          "url": "/test-assets/20261007-v1/03_product_text/photographer-3e65f129402f.jpg",
+          "width": 1215,
+          "height": 1295,
+          "sha256": "402b64ebd7914ace11b12c9ab24a25b90ef4904d804f40626b14a3a3ad5398e1"
+        },
+        "creative": {
+          "url": "/test-assets/20261007-v1/03_product_text/creative-42eec4c4549d.jpg",
+          "width": 1215,
+          "height": 1295,
+          "sha256": "c5c911f246c3d6ffffd1b2d7f2fa9ce8cfb3bacacb720b066779dabac5a84acd"
+        }
+      },
+      "source": "合成原片 · 实际 AI 编辑",
+      "tip": "拍商品时把无关物品移出画面，并让包装正面与镜头尽量平行。"
+    }
+  ],
+  "automatedBackend": false
+}
