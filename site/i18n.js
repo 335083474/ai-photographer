@@ -1,4 +1,4 @@
-import chinese from './locales/zh-CN.js';
+import chinese from './locales/zh-CN.js?v=three-versions-20261015';
 
 const canonical=value=>Intl.getCanonicalLocales(value)[0];
 

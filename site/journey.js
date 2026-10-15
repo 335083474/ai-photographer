@@ -1,4 +1,5 @@
-import {i18n,applyTranslations} from './i18n.js';
+import {i18n,applyTranslations} from './i18n.js?v=three-versions-20261015';
+import {createZip} from './zip.js';
 
 (() => {
   const $=selector=>document.querySelector(selector);
@@ -94,9 +95,9 @@ import {i18n,applyTranslations} from './i18n.js';
     $('#workspace-source').textContent=current.source;
     const notice=current.kind==='sample'?'这些是已经生成的 AI 测试结果。点击一张，再与原片对比。':current.mode==='real'?'已完成版本经过自动复核，请再确认人物、文字与场景细节；未通过的版本不会提供下载。':'本地演示：这三张使用调色与裁剪，未实际改变人物动作或场景。';
     const content=$('#workspace-content');
-    content.innerHTML=`<p class="workspace-notice">${E(notice)}</p><div class="result-grid" role="group" aria-label="选择修图版本">${current.variants.map((v,i)=>`<button class="result-card" data-version="${v.id}" aria-pressed="false" ${v.status!=='ready'?'disabled':''}><div class="result-thumb">${v.preview?`<img src="${E(v.preview)}" alt="${E(v.name)}结果">`:'<span>此版本未完成</span>'}<span class="result-number">0${i+1}</span><span class="result-chosen" hidden>已选 ✓</span></div><div class="result-copy"><h3>${E(v.name)}</h3><p>${E(v.description||'此版本未完成')}</p></div></button>`).join('')}</div>
+    content.innerHTML=`<p class="workspace-notice">${E(notice)}</p><div class="result-grid" role="group" aria-label="选择修图版本">${current.variants.map((v,i)=>`<button class="result-card" data-version="${v.id}" aria-pressed="false" ${v.status!=='ready'?'disabled':''}><div class="result-thumb">${v.preview?`<img src="${E(v.preview)}" alt="${E(v.name)}结果">`:'<span>此版本未完成</span>'}<span class="result-number">0${i+1}</span><span class="result-chosen" hidden>查看中</span></div><div class="result-copy"><h3>${E(v.name)}</h3><p>${E(v.description||'此版本未完成')}</p></div></button>`).join('')}</div>
       <div class="selected-layout"><div><div class="view-toolbar"><span id="selected-view-name"></span><button class="text-action" id="toggle-original" aria-pressed="false">查看原片 ↔</button></div><div class="selected-stage"><img id="selected-image" alt=""><span class="watermark" aria-hidden="true">LIGHT ISLE · PREVIEW</span><span class="photo-caption" id="selected-image-label"></span></div></div>
-      <aside class="result-sidebar"><p class="kicker">你选中的这一张</p><h2 id="selected-name"></h2><p class="selected-note" id="selected-note"></p><p class="result-meta" id="selected-meta"></p><button class="button primary" id="open-checkout">选这张，确认下载 <span aria-hidden="true">↗</span></button><p class="download-hint">当前体验免费 · 下载同一版 · 无需登录</p><div class="other-choice"><p>还没找到喜欢的？可以看看另外两个版本，或换张照片。</p><button class="text-action" data-upload>换张照片试试 ↗</button></div><details class="photo-tip"><summary>下次拍照，可以试试</summary><p>${E(current.tip)}</p></details></aside></div>
+      <aside class="result-sidebar"><p class="kicker">正在查看的效果</p><h2 id="selected-name"></h2><p class="selected-note" id="selected-note"></p><p class="result-meta" id="selected-meta"></p><button class="button primary" id="open-checkout">${E(t('bundle.download'))} <span aria-hidden="true">↗</span></button><p class="download-hint">${E(t('bundle.demoHint'))}</p><div class="other-choice"><p>还没找到喜欢的？可以看看另外两个版本，或换张照片。</p><button class="text-action" data-upload>换张照片试试 ↗</button></div><details class="photo-tip"><summary>下次拍照，可以试试</summary><p>${E(current.tip)}</p></details></aside></div>
       <div class="result-footer"><span>${current.kind==='sample'?'示例结果仅用于体验；人物、场景或商品细节仍需复核。':current.kind==='browser'?'照片只在当前浏览器内处理，刷新或关闭后清除，不上传到服务器。':current.mode==='real'?'照片仅用于本次处理，服务副本最长保留 24 小时，可随时删除，不会加入照片墙。':'照片只保存在本机服务，最长 24 小时，可随时删除。'}</span><button class="text-action" id="clear-result">${current.kind==='sample'?'清除示例选择':'删除本次照片'}</button></div>`;
     const available=current.variants.filter(v=>v.status==='ready');
     if(!available.some(v=>v.id===current.selected))current.selected=available[0]?.id;
@@ -104,7 +105,8 @@ import {i18n,applyTranslations} from './i18n.js';
     content.querySelectorAll('[data-version]').forEach(b=>b.onclick=()=>choose(b.dataset.version));
     $('#toggle-original').onclick=()=>{current.showOriginal=!current.showOriginal;updateSelection();};
     $('#open-checkout').onclick=openCheckout;$('#clear-result').onclick=clearResult;
-    if(current.kind==='upload'&&current.mode!=='demo'){$('#open-checkout').textContent=config.payments?.enabled?'选这张，查看价格 ↗':'付款服务尚未配置';$('#open-checkout').disabled=!config.payments?.enabled;$('.download-hint').textContent=!config.payments?.enabled?'当前可预览，付款配置后开放下载':config.payments.mode==='test'?'Stripe 测试付款 · 不会实际扣款':'由 Stripe 处理付款 · 下载所选的同一版';}
+    if(current.kind==='upload'&&current.mode!=='demo'){$('#open-checkout').textContent=config.payments?.enabled?'整套三张，查看价格 ↗':'付款服务尚未配置';$('#open-checkout').disabled=!config.payments?.enabled;$('.download-hint').textContent=!config.payments?.enabled?'当前可预览，付款配置后开放下载':config.payments.mode==='test'?'Stripe 测试付款 · 三张全拿 · 不会实际扣款':'一次付款 · 三张全拿 · Stripe 安全付款';}
+    if(!levels.every(level=>available.some(v=>v.id===level))){$('#open-checkout').disabled=true;$('.download-hint').textContent='三个版本尚未全部完成，暂不能下载整套。';}
     updateSelection();refreshResume();
   }
   function choose(id){current.selected=id;current.showOriginal=false;if(current.kind==='sample')save(sampleKey,{id:current.caseId,selected:id});else if(session){session.selected=id;save(jobKey,session);}updateSelection();}
@@ -119,22 +121,24 @@ import {i18n,applyTranslations} from './i18n.js';
   }
   function openCheckout(){
     const v=current.variants.find(x=>x.id===current.selected);if(!v||v.status!=='ready')return;
-    checkoutSelection={kind:current.kind,mode:current.mode,caseId:current.caseId,variant:{...v},session:current.kind==='upload'?{...session}:null};
-    $('#checkout-image').src=v.preview;$('#checkout-name').textContent=v.name;$('#checkout-meta').textContent=`${v.width} × ${v.height} px · ${current.kind==='sample'?'示例照片':'我的照片'}`;
+    if(!levels.every(level=>current.variants.some(item=>item.id===level&&item.status==='ready')))return;
+    checkoutSelection={kind:current.kind,mode:current.mode,caseId:current.caseId,variant:{...v},variants:levels.map(level=>({...current.variants.find(item=>item.id===level)})),session:current.kind==='upload'?{...session}:null};
+    $('#checkout-bundle').replaceChildren(...checkoutSelection.variants.map(item=>{const figure=document.createElement('figure'),image=document.createElement('img'),caption=document.createElement('figcaption');image.src=item.preview;image.alt=item.name;caption.textContent=item.name;figure.append(image,caption);return figure;}));
+    $('#checkout-name').textContent=t('bundle.includes');$('#checkout-meta').textContent=t('bundle.meta');
     const paidFlow=current.kind==='upload'&&current.mode!=='demo';
-    $('.checkout-price>span').textContent=paidFlow?'所选版本':'本次体验';
-    $('.checkout-price strong').innerHTML=paidFlow?`${E(priceFor(v.id))}<small>${config.payments?.mode==='test'?'Stripe 测试模式 · 不会实际扣款':'一次付款 · 下载这一版'}</small>`:'¥0 <small>拟定 ¥6.9 / 版本</small>';
-    $('.checkout-disclosure').textContent=paidFlow?'付款由 Stripe 处理。返回本页后会向后台核验订单，核验通过才开放这一版下载。请保留当前浏览器，以便返回后继续下载。':'当前为免费演示，不会实际扣款。下载你选中的这一版，不会重新生成。';
-    $('#download-button').disabled=false;$('#download-button').textContent=paidFlow?'前往 Stripe 付款 ↗':'确认并免费下载 ↓';$('#payment-link').hidden=true;
+    $('.checkout-price>span').textContent=paidFlow?'三张整套':'本次体验';
+    $('.checkout-price strong').innerHTML=paidFlow?`${E(priceFor())}<small>${config.payments?.mode==='test'?'Stripe 测试模式 · 不会实际扣款':'一次付款 · 三张全拿'}</small>`:`¥0 <small>${E(t('bundle.proposedPrice'))}</small>`;
+    $('.checkout-disclosure').textContent=paidFlow?'一次付款包含自然修好、摄影师优化、创意重拍三个版本。Stripe 付款返回后，由后台核验订单；核验通过后打包下载三张原尺寸成片。请保留当前浏览器。':t('bundle.demoDisclosure');
+    $('#download-button').disabled=false;$('#download-button').textContent=paidFlow?'前往 Stripe 付款 ↗':t('bundle.confirmFree');$('#payment-link').hidden=true;
     if(paidFlow&&!config.payments?.enabled){$('#download-button').disabled=true;$('.checkout-disclosure').textContent='付款服务尚未配置，当前只可预览。';}
     $('#download-status').textContent='';$('#checkout-dialog').showModal();
-    if(paidFlow&&pendingOrder?.jobId===session.id&&pendingOrder.variant===v.id)void watchPayment(checkoutSelection,pendingOrder);
+    if(paidFlow&&pendingOrder?.jobId===session.id&&pendingOrder.variant==='bundle')void watchPayment(checkoutSelection,pendingOrder);
   }
-  function priceFor(id){const amount=config.payments?.prices?.[id];return Number.isSafeInteger(amount)?i18n.formatMoney(amount,config.payments.currency):'价格未配置';}
+  function priceFor(){const amount=config.payments?.bundlePriceMinor;return Number.isSafeInteger(amount)?i18n.formatMoney(amount,config.payments.currency):'价格未配置';}
   function stripeUrl(value){const url=new URL(value);if(url.protocol!=='https:'||url.hostname!=='checkout.stripe.com'||url.username||url.password)throw new Error('付款链接无效，请稍后重试。');return url.href;}
   const activeCheckout=selection=>checkoutSelection===selection&&$('#checkout-dialog').open;
   function persistCheckout(selection,order){
-    const auth={...selection.session,selected:selection.variant.id},pending={id:order.orderId,jobId:auth.id,variant:selection.variant.id};
+    const auth={...selection.session,selected:selection.variant.id},pending={id:order.orderId,jobId:auth.id,variant:'bundle'};
     const savedJob=save(jobKey,auth),savedOrder=save(orderKey,pending),job=stored(jobKey),receipt=stored(orderKey);
     if(!savedJob||!savedOrder||job?.id!==auth.id||job?.token!==auth.token||job?.apiBase!==apiBase||receipt?.id!==pending.id||receipt?.jobId!==auth.id||receipt?.variant!==pending.variant)throw new Error('当前浏览器无法保存下载凭证，请允许当前会话存储后再付款。');
     session=auth;pendingOrder=pending;
@@ -145,8 +149,8 @@ import {i18n,applyTranslations} from './i18n.js';
       if(!activeCheckout(selection))return;
       const state=await(await request(`/api/jobs/${selection.session.id}/orders/${encodeURIComponent(order.id)}`,{},selection.session)).json();
       if(!activeCheckout(selection))return;
-      if(state.variant!==selection.variant.id||state.id!==order.id)throw new Error('订单与所选版本不一致。');
-      if(state.status==='paid'){selection.order=state;$('#download-status').textContent=state.testPayment?'测试付款已核验，可下载所选版本；没有真实扣款。':'付款已核验，可下载所选版本。';button.textContent='下载原尺寸照片 ↓';return;}
+      if(state.variant!=='bundle'||state.product!=='three-versions'||state.id!==order.id)throw new Error('订单与三张整套不一致。');
+      if(state.status==='paid'){selection.order=state;$('#download-status').textContent=state.testPayment?'测试付款已核验，可下载整套三张；没有真实扣款。':'付款已核验，三个版本全部可下载。';button.textContent=t('bundle.downloadOriginals');return;}
       if(['expired','failed','refunded','disputed','review_required'].includes(state.status)){
         const messages={expired:'订单已过期，可重新发起付款。',failed:'付款未完成，可重新发起。',refunded:'订单已退款，原下载权限已撤销。',disputed:'订单正在处理支付争议，下载权限已暂停。',review_required:'订单需要人工核对，暂未开放下载。'};
         $('#download-status').textContent=messages[state.status];pendingOrder=null;save(orderKey,null);selection.paymentBlocked=['disputed','review_required'].includes(state.status);button.textContent=selection.paymentBlocked?'订单需人工核对':'重新前往付款 ↗';selection.waitingForPayment=false;selection.order=null;return;
@@ -157,16 +161,14 @@ import {i18n,applyTranslations} from './i18n.js';
     }button.textContent='重新核验付款状态 ↻';
     }catch(e){if(activeCheckout(selection))$('#download-status').textContent=e.message;}finally{if(activeCheckout(selection))button.disabled=selection.paymentBlocked===true;}
   }
-  async function downloadSelected(){
-    if(!checkoutSelection||!activeCheckout(checkoutSelection))return;const selection=checkoutSelection,button=$('#download-button');button.disabled=true;$('#download-status').textContent='正在准备所选的同一版照片…';
+  async function downloadBundle(){
+    if(!checkoutSelection||!activeCheckout(checkoutSelection))return;const selection=checkoutSelection,button=$('#download-button');button.disabled=true;$('#download-status').textContent=t('bundle.preparing');
     try{
-      let response;
-      if(selection.kind==='sample')response=await request(staticPreview||apiBase?selection.variant.download:`/api/examples/${encodeURIComponent(selection.caseId)}/${selection.variant.id}/download`,{},null);
-      else if(selection.kind==='browser')response=await fetch(selection.variant.preview);
-      else{
-        const receipt=await(await request(`/api/jobs/${selection.session.id}/checkout`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({variant:selection.variant.id})},selection.session)).json();
+      let receipt;
+      if(selection.kind==='upload'){
+        receipt=await(await request(`/api/jobs/${selection.session.id}/checkout`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({product:'three-versions'})},selection.session)).json();
         if(!activeCheckout(selection))return;
-        if(receipt.variant!==selection.variant.id)throw new Error('下载确认与所选版本不一致，请重试。');
+        if(receipt.variant!=='bundle'||receipt.product!=='three-versions'||!Array.isArray(receipt.variants)||receipt.variants.length!==3||!levels.every(level=>receipt.variants.includes(level)))throw new Error('下载确认与三张整套不一致，请重试。');
         if(selection.mode!=='demo'){
           if(!['test','live'].includes(receipt.mode)||!receipt.orderId)throw new Error('付款订单尚未正确创建。');
           persistCheckout(selection,receipt);
@@ -177,19 +179,27 @@ import {i18n,applyTranslations} from './i18n.js';
           }
           selection.order=receipt;
         }else if(receipt.charged!==false)throw new Error('演示下载确认不正确，请重试。');
-        if(receipt.download!==`/api/jobs/${selection.session.id}/variants/${selection.variant.id}/download`)throw new Error('下载地址与所选版本不一致。');
-        response=await request(receipt.download,{},selection.session);
       }
-      const blob=await response.blob();
-      if(!activeCheckout(selection))return;
-      if(selection.variant.sha256){
-        if(!staticPreview&&(selection.kind!=='sample'||!apiBase)&&response.headers.get('X-Image-SHA256')!==selection.variant.sha256)throw new Error('下载文件与所选记录不一致，请刷新重试。');
-        if(globalThis.crypto?.subtle){const digest=await crypto.subtle.digest('SHA-256',await blob.arrayBuffer());const hash=[...new Uint8Array(digest)].map(b=>b.toString(16).padStart(2,'0')).join('');if(hash!==selection.variant.sha256)throw new Error('示例文件已变化，请刷新后重新选择。');}
+      const entries=[];
+      for(const variant of selection.variants){
+        if(!activeCheckout(selection))return;
+        let response;
+        if(selection.kind==='sample')response=await request(staticPreview||apiBase?variant.download:`/api/examples/${encodeURIComponent(selection.caseId)}/${variant.id}/download`,{},null);
+        else if(selection.kind==='browser')response=await fetch(variant.preview);
+        else{const expected=`/api/jobs/${selection.session.id}/variants/${variant.id}/download`;if(receipt.downloads?.[variant.id]!==expected)throw new Error('整套下载地址不一致。');response=await request(expected,{},selection.session);}
+        if(!response.ok)throw new Error('照片下载失败，请重试。');
+        const bytes=new Uint8Array(await response.arrayBuffer());
+        if(variant.sha256){
+          if(!staticPreview&&(selection.kind!=='sample'||!apiBase)&&response.headers.get('X-Image-SHA256')!==variant.sha256)throw new Error('下载文件与结果记录不一致，请刷新重试。');
+          if(globalThis.crypto?.subtle){const digest=await crypto.subtle.digest('SHA-256',bytes);const hash=[...new Uint8Array(digest)].map(b=>b.toString(16).padStart(2,'0')).join('');if(hash!==variant.sha256)throw new Error('照片文件已变化，请刷新后重新确认。');}
+        }
+        const ext=response.headers.get('Content-Type')?.includes('png')?'png':'jpg';entries.push({name:`light-isle-${variant.id}.${ext}`,bytes});
       }
       if(!activeCheckout(selection))return;
+      const blob=new Blob([createZip(entries)],{type:'application/zip'});
       const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;
-      const ext=blob.type.includes('png')?'png':'jpg';a.download=`light-isle-${selection.kind==='sample'?'sample-':''}${selection.variant.id}.${ext}`;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);
-      const paid=selection.order?.status==='paid';if(paid)button.textContent='下载原尺寸照片 ↓';const message=paid?(selection.order.testPayment?'测试付款已确认，下载已开始；没有真实扣款。':'付款已确认，下载已开始。'):'下载已开始，本次没有收费。';$('#download-status').textContent=message;toast(message);
+      a.download=`light-isle-${selection.kind==='sample'?'sample-':''}three-versions.zip`;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);
+      const paid=selection.order?.status==='paid';if(paid)button.textContent=t('bundle.downloadOriginals');const message=paid?(selection.order.testPayment?'整套三张已开始下载；测试付款没有真实扣款。':'整套三张已开始下载。'):t('bundle.freeSuccess');$('#download-status').textContent=message;toast(message);
     }catch(e){if(activeCheckout(selection))$('#download-status').textContent=e.message;}finally{if(activeCheckout(selection))button.disabled=selection.paymentBlocked===true;}
   }
   function progress(status='queued'){
@@ -275,7 +285,7 @@ import {i18n,applyTranslations} from './i18n.js';
   $('.brand').addEventListener('click',e=>{e.preventDefault();showHome();});$('#back-home').onclick=()=>showHome();
   document.querySelectorAll('[data-home-anchor]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();showHome(a.dataset.homeAnchor);}));
   $('#resume-task').onclick=()=>{if(current?.variants){renderResults();showWorkspace();}else if(session)void resumeJob();};
-  $('#close-checkout').onclick=()=>$('#checkout-dialog').close();$('#download-button').onclick=downloadSelected;
+  $('#close-checkout').onclick=()=>$('#checkout-dialog').close();$('#download-button').onclick=downloadBundle;
   $('#checkout-dialog').addEventListener('close',()=>{checkoutSelection=null;});
   $('#checkout-dialog').addEventListener('click',e=>{if(e.target===$('#checkout-dialog')){const r=e.target.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)e.target.close();}});
   if('IntersectionObserver' in window)new IntersectionObserver(entries=>{heroVisible=entries[0].isIntersecting;refreshSticky();scheduleHero();}).observe($('.hero'));
@@ -313,14 +323,13 @@ import {i18n,applyTranslations} from './i18n.js';
     if(backendReady&&config.mode==='real'){
       $('.purchase-note span:nth-child(2)').textContent='免费预览';
       $('.question-price strong').textContent='先看效果，再选购';
-      const cheapest=levels.slice().sort((a,b)=>(config.payments?.prices?.[a]??Infinity)-(config.payments?.prices?.[b]??Infinity))[0];
-      $('.question-price>span').textContent=config.payments?.enabled?`下载 ${priceFor(cheapest)} 起 / 版本`:'当前只开放预览';
+      $('.question-price>span').textContent=config.payments?.enabled?`${priceFor()} / 三张整套`:'当前只开放预览';
       $('.site-footer>div>span').textContent=config.payments?.enabled?(config.payments.mode==='test'?'Stripe 测试版':'先预览，再购买'):'预览版';
-      $('.demo-notice').textContent='上传照片将交由 AI 服务编辑，服务副本最长保留 24 小时。'+(config.payments?.enabled?(config.payments.mode==='test'?'付款当前为 Stripe 测试模式，不会实际扣款。':'先看效果，再通过 Stripe 购买所选版本。'):'付款服务尚未配置，当前可查看预览。');
+      $('.demo-notice').textContent='上传照片将交由 AI 服务编辑，服务副本最长保留 24 小时。'+(config.payments?.enabled?(config.payments.mode==='test'?'付款当前为 Stripe 测试模式，不会实际扣款。':'先看效果，再通过 Stripe 一次购买三个版本。'):'付款服务尚未配置，当前可查看预览。');
       const paragraphs=document.querySelectorAll('.question-list details p');
-      paragraphs[0].textContent=config.payments?.enabled?'先查看已完成的三个版本，再选择需要的版本。具体价格在付款前展示，订单只对应选中的这一版。当前支付模式：'+(config.payments.mode==='test'?'测试，不会真实扣款。':'Stripe 正式付款。'):'上传后可查看 AI 编辑预览，付款尚未配置，暂不开放付费下载。';
+      paragraphs[0].textContent=config.payments?.enabled?'先查看三个版本，喜欢再付款。一次付款包含三张原尺寸成片，具体整套价格在付款前展示。三个版本未全部完成时不会开放付款。当前支付模式：'+(config.payments.mode==='test'?'测试，不会真实扣款。':'Stripe 正式付款。'):'上传后可查看 AI 编辑预览，付款尚未配置，暂不开放付费下载。';
       paragraphs[1].textContent='照片不会加入照片墙。上传会发送给配置的 AI 服务；本服务副本最长保留 24 小时，可删除。AI 服务方的记录按其规则处理。';
-      paragraphs[3].textContent='上传后会分析照片、分别编辑三档结果并复核，未通过的版本不会开放下载。付款后由后台核验订单，再交付所选同一版本。照片细节请本人复核。';
+      paragraphs[3].textContent='上传后会分析照片、分别编辑三档结果并复核。三个版本全部完成后可一次购买整套，后台核验付款后提供三张同版成片的打包下载。照片细节请本人复核。';
     }
   }
   function refreshLocale(){
