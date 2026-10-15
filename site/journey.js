@@ -42,7 +42,7 @@
   function renderGallery(type='all'){
     const visible=type==='all'?cases:cases.filter(c=>c.type===type),gallery=$('#gallery');
     gallery.classList.toggle('filtered',type!=='all');gallery.style.setProperty('--columns',Math.min(visible.length,2));
-    gallery.innerHTML=visible.map(c=>`<article class="wall-card"><button class="case-photo" data-case="${E(c.id)}" style="--ratio:${c.images[c.level].width/c.images[c.level].height}" aria-label="查看${E(c.title)}的原片和三档结果"><img src="${E(c.images[c.level].url)}" alt="${E(c.title)} · ${names[c.level]}" loading="lazy"><span class="case-category">${E(c.label)}</span><span class="case-open">原片 + 三档 ↗</span></button><div class="case-info"><p>${E(c.focus)}</p><h3>${E(c.title)}</h3><small>${E(c.source)}</small></div></article>`).join('');
+    gallery.innerHTML=visible.map(c=>`<article class="wall-card"><button class="case-photo" data-case="${E(c.id)}" style="--ratio:${c.images[c.level].width/c.images[c.level].height}" aria-label="查看${E(c.title)}的原片和三档结果"><span class="case-photos"><figure><img src="${E(c.images.original.url)}" alt="${E(c.label)}原片" loading="lazy"><figcaption class="photo-label">原片</figcaption></figure><figure><img src="${E(c.images[c.level].url)}" alt="${E(c.title)} · ${names[c.level]}" loading="lazy"><figcaption class="photo-label accent">${names[c.level]}</figcaption></figure></span><span class="case-open" aria-hidden="true">↗</span></button><div class="case-info"><div class="case-heading-line"><span>${E(c.label)} / ${E(c.focus)}</span><span>0${cases.indexOf(c)+1}</span></div><h3>${E(c.title)}</h3><small>${E(c.source)}</small></div></article>`).join('');
   }
   function openSample(id){
     const item=cases.find(c=>c.id===id);if(!item)return;

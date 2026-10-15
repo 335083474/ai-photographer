@@ -2,6 +2,8 @@
 
 Public layout preview: https://335083474.github.io/ai-photographer/
 
+Studio redesign, 2026-10-15: warm paper, dark ink and yellow accents, larger typography, side-by-side original/result photos, and a responsive photo-selection workspace. Editable [Figma design](https://www.figma.com/design/5jHrb0BJx58ruG3ShaCg7z?node-id=3-20) includes desktop and mobile frames; access follows the Figma file's permissions.
+
 - Compare before/after examples and three editing levels.
 - Browse the previous layout through the comparison link.
 - Try local brightness, color and crop adjustments entirely in the browser. Your uploaded photos are not sent to GitHub or an AI service.
