@@ -36,5 +36,6 @@ export default {
     'bundle.confirmFree':'确认并免费下载三张 ↓','bundle.downloadOriginals':'下载三张原尺寸照片 ↓',
     'bundle.preparing':'正在准备三个版本并打包…','bundle.freeSuccess':'整套三张已开始下载，本次没有收费。',
     'bundle.paymentAnswer':'不需要。先看三个版本，喜欢再决定。拟定 ¥6.9，一次付款包含自然修好、摄影师优化、创意重拍三张原尺寸成片；当前演示全程免费。',
+    'aftercare.title':'还想调整？再近一点。','aftercare.open':'告诉我们，你想怎么调整','aftercare.submit':'按这个方向，补做一张 ↗',
   },
 };
